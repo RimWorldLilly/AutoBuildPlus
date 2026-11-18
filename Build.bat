@@ -8,23 +8,23 @@ if "%GAME_DIR%"=="" set "GAME_DIR=Y:\SteamLibrary\steamapps\common\RimWorld"
 set "HARMONY_DLL=%HARMONY_DLL%"
 if "%HARMONY_DLL%"=="" set "HARMONY_DLL=Y:\SteamLibrary\steamapps\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll"
 
-if not exist "%GAME_DIR%\Assembly-CSharp.dll" (
-    echo ERROR: Assembly-CSharp.dll was not found.
-    echo Expected: "%GAME_DIR%\Assembly-CSharp.dll"
-    echo Set RIMWORLD_DIR to your RimWorld installation folder.
-    exit /b 1
+for %%F in (Assembly-CSharp.dll RimWorld.dll UnityStubs.dll Waylith.dll) do (
+    if not exist "%GAME_DIR%\%%F" (
+        echo ERROR: Required RimWorld 1.7 assembly not found:
+        echo "%GAME_DIR%\%%F"
+        exit /b 1
+    )
 )
 
 if not exist "%HARMONY_DLL%" (
-    echo ERROR: 0Harmony.dll was not found.
-    echo Expected: "%HARMONY_DLL%"
-    echo Set HARMONY_DLL to the full path of 0Harmony.dll.
+    echo ERROR: 0Harmony.dll was not found:
+    echo "%HARMONY_DLL%"
     exit /b 1
 )
 
 where dotnet >nul 2>&1
 if errorlevel 1 (
-    echo ERROR: .NET SDK is required. Install a supported .NET SDK and retry.
+    echo ERROR: .NET SDK 10 is required. Install .NET 10 SDK and retry.
     exit /b 1
 )
 
