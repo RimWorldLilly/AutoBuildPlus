@@ -25,6 +25,14 @@ namespace AutoBuildInstantConstruction
     [HarmonyPatch]
     internal static class InstantFrameConstructionPatch
     {
+        private static bool Prepare()
+        {
+            Type mapType = AccessTools.TypeByName("AutoBuild.AutoBuildMap");
+            Type progressType = AccessTools.TypeByName("AutoBuild.AutoBuildProgress");
+            return mapType != null && progressType != null &&
+                   AccessTools.Method(mapType, "Advance", new[] { typeof(Frame), typeof(float), progressType }) != null;
+        }
+
         private static MethodBase TargetMethod()
         {
             Type mapType = AccessTools.TypeByName("AutoBuild.AutoBuildMap");
@@ -69,6 +77,12 @@ namespace AutoBuildInstantConstruction
     [HarmonyPatch]
     internal static class RemoveRoofConstructionCapPatch
     {
+        private static bool Prepare()
+        {
+            Type mapType = AccessTools.TypeByName("AutoBuild.AutoBuildMap");
+            return mapType != null && AccessTools.Method(mapType, "BuildReadyRoofs") != null;
+        }
+
         private static MethodBase TargetMethod()
         {
             Type mapType = AccessTools.TypeByName("AutoBuild.AutoBuildMap");
