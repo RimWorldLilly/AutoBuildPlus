@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>AutoBuildInstantConstruction</AssemblyName>
     <RootNamespace>AutoBuildInstantConstruction</RootNamespace>
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>..\Assemblies\</OutputPath>
     <GameDir Condition="'$(GameDir)' == ''">$(RIMWORLD_DIR)</GameDir>
@@ -29,5 +30,25 @@
       <HintPath>$(GameDir)\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="RimWorld">
+      <HintPath>$(GameDir)\RimWorld.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityStubs">
+      <HintPath>$(GameDir)\UnityStubs.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Waylith">
+      <HintPath>$(GameDir)\Waylith.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
+
+  <Target Name="ValidateBuildInputs" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(HarmonyDll)')" Text="0Harmony.dll not found: $(HarmonyDll)" />
+    <Error Condition="!Exists('$(GameDir)\Assembly-CSharp.dll')" Text="Assembly-CSharp.dll not found: $(GameDir)" />
+    <Error Condition="!Exists('$(GameDir)\RimWorld.dll')" Text="RimWorld.dll not found: $(GameDir)" />
+    <Error Condition="!Exists('$(GameDir)\UnityStubs.dll')" Text="UnityStubs.dll not found: $(GameDir)" />
+    <Error Condition="!Exists('$(GameDir)\Waylith.dll')" Text="Waylith.dll not found: $(GameDir)" />
+  </Target>
 </Project>
