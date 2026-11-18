@@ -1,1 +1,21 @@
-<Project />
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>AutoBuildInstantConstruction</AssemblyName>
+    <RootNamespace>AutoBuildInstantConstruction</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <GameDir Condition="'$(GameDir)' == ''">$(RIMWORLD_DIR)</GameDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GameDir)' == ''">
+    <GameDir>Y:\SteamLibrary\steamapps\common\RimWorld</GameDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony"><HintPath>$(GameDir)\RimWorldWin64_Data\Managed\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(GameDir)\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameDir)\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
