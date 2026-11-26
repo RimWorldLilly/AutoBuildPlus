@@ -92,13 +92,35 @@ namespace AutoBuildInstantConstruction
         private static IEnumerable<CodeInstruction> Transpiler(
             IEnumerable<CodeInstruction> instructions)
         {
-            foreach (CodeInstruction instruction in instructions)
+            List<CodeInstruction> codes = new List<CodeInstruction>(instructions);
+            int matchedConstants = 0;
+
+            // AutoBuild's original BuildReadyRoofs contains:
+            // if (++num == 8) break;
+            // Replace only the eight that feeds this comparison branch.
+            for (int i = 0; i < codes.Count - 1; i++)
             {
-                if (instruction.opcode == OpCodes.Ldc_I4_8)
-                    yield return new CodeInstruction(OpCodes.Ldc_I4, int.MaxValue);
-                else
-                    yield return instruction;
+                bool isEight = codes[i].opcode == OpCodes.Ldc_I4_8 ||
+                    (codes[i].opcode == OpCodes.Ldc_I4 && codes[i].operand is int value && value == 8);
+                bool isEqualityBranch = codes[i + 1].opcode == OpCodes.Bne_Un ||
+                    codes[i + 1].opcode == OpCodes.Bne_Un_S;
+
+                if (isEight && isEqualityBranch)
+                {
+                    matchedConstants++;
+                    codes[i].opcode = OpCodes.Ldc_I4;
+                    codes[i].operand = int.MaxValue;
+                }
             }
+
+            if (matchedConstants != 1)
+            {
+                Log.Error("[AutoBuild Plus] Could not uniquely identify the roof-count comparison in " +
+                    "AutoBuildMap.BuildReadyRoofs. The original roof limit was left unchanged.");
+                return instructions;
+            }
+
+            return codes;
         }
     }
 }
