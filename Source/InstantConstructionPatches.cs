@@ -103,7 +103,9 @@ namespace AutoBuildInstantConstruction
             {
                 bool isEight = codes[i].opcode == OpCodes.Ldc_I4_8 ||
                     (codes[i].opcode == OpCodes.Ldc_I4 && codes[i].operand is int value && value == 8);
-                bool isEqualityBranch = codes[i + 1].opcode == OpCodes.Bne_Un ||
+                bool isEqualityBranch = codes[i + 1].opcode == OpCodes.Beq ||
+                    codes[i + 1].opcode == OpCodes.Beq_S ||
+                    codes[i + 1].opcode == OpCodes.Bne_Un ||
                     codes[i + 1].opcode == OpCodes.Bne_Un_S;
 
                 if (isEight && isEqualityBranch)
