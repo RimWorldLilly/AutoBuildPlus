@@ -1,1 +1,9 @@
+v1.0.1
+
+- Added AutoBuild as a required dependency.
+- Restricted the roof-cap transpiler to the counter comparison in BuildReadyRoofs.
+- The patch now fails closed if the expected IL pattern is not unique.
+
+----------------------------------------
+
 v1.0.0
