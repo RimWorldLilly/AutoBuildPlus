@@ -93,6 +93,7 @@ namespace AutoBuildInstantConstruction
             IEnumerable<CodeInstruction> instructions)
         {
             List<CodeInstruction> codes = new List<CodeInstruction>(instructions);
+            int matchIndex = -1;
             int matchedConstants = 0;
 
             // AutoBuild's original BuildReadyRoofs contains:
@@ -108,8 +109,7 @@ namespace AutoBuildInstantConstruction
                 if (isEight && isEqualityBranch)
                 {
                     matchedConstants++;
-                    codes[i].opcode = OpCodes.Ldc_I4;
-                    codes[i].operand = int.MaxValue;
+                    matchIndex = i;
                 }
             }
 
@@ -117,9 +117,12 @@ namespace AutoBuildInstantConstruction
             {
                 Log.Error("[AutoBuild Plus] Could not uniquely identify the roof-count comparison in " +
                     "AutoBuildMap.BuildReadyRoofs. The original roof limit was left unchanged.");
-                return instructions;
+                return codes;
             }
 
+            // Preserve labels and exception-block metadata attached to the instruction.
+            codes[matchIndex].opcode = OpCodes.Ldc_I4;
+            codes[matchIndex].operand = int.MaxValue;
             return codes;
         }
     }
