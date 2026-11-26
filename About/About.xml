@@ -12,12 +12,18 @@
       <displayName>Harmony</displayName>
       <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
     </li>
+    <li>
+      <packageId>C44.AutoBuild</packageId>
+      <displayName>AutoBuild</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3841214579</steamWorkshopUrl>
+    </li>
   </modDependencies>
   <loadAfter>
     <li>brrainz.harmony</li>
+    <li>C44.AutoBuild</li>
   </loadAfter>
   <description>Instantly completes the remaining construction work for AutoBuild projects, including walls, floors, buildings, and terrain. The original AutoBuild processing interval remains unchanged. Also removes the per-update roof construction cap. Requires the original AutoBuild mod.
 
 AutoBuild의 벽, 바닥, 건물, 지형 등 모든 자동 건설 작업에서 남은 작업량을 즉시 완료합니다. 원본 AutoBuild의 처리 틱 간격은 변경하지 않습니다. 한 번의 처리 주기당 지붕 건설량 제한도 제거합니다. 원본 AutoBuild 모드가 필요합니다.</description>
-  <modVersion>1.0.0</modVersion>
+  <modVersion>1.0.1</modVersion>
 </ModMetaData>
