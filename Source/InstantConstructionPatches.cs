@@ -68,17 +68,6 @@ namespace AutoBuildInstantConstruction
         }
     }
 
-    public sealed class AutoBuildPlusSettings : ModSettings
-    {
-        internal int updateInterval = 1;
-
-        public override void ExposeData()
-        {
-            Scribe_Values.Look(ref updateInterval, "updateInterval", 1);
-            updateInterval = Math.Max(1, Math.Min(15, updateInterval));
-        }
-    }
-
     // Complete the remaining work of each frame as soon as AutoBuild advances it.
     [HarmonyPatch]
     internal static class InstantFrameConstructionPatch
