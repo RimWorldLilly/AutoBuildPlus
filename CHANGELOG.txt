@@ -1,3 +1,11 @@
+v1.0.4
+
+----------------------------------------
+
+v1.0.3
+
+----------------------------------------
+
 v1.0.2
 
 - Added a persistent 1-15 tick AutoBuild update-interval setting (default: 1 tick).
