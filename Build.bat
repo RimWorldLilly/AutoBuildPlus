@@ -3,10 +3,10 @@ setlocal
 cd /d "%~dp0"
 
 set "GAME_DIR=%RIMWORLD_DIR%"
-if "%GAME_DIR%"=="" set "GAME_DIR=Y:\SteamLibrary\steamapps\common\RimWorld"
+if "%GAME_DIR%"=="" set "GAME_DIR=G:\SteamLibrary\steamapps\common\RimWorld"
 
 set "HARMONY_DLL=%HARMONY_DLL%"
-if "%HARMONY_DLL%"=="" set "HARMONY_DLL=Y:\SteamLibrary\steamapps\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll"
+if "%HARMONY_DLL%"=="" set "HARMONY_DLL=G:\SteamLibrary\steamapps\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll"
 
 for %%F in (Assembly-CSharp.dll RimWorld.dll UnityStubs.dll Waylith.dll) do (
     if not exist "%GAME_DIR%\%%F" (
