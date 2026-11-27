@@ -1,3 +1,13 @@
+v1.0.2
+
+- Added a persistent 1-15 tick AutoBuild update-interval setting (default: 1 tick).
+- Updated AutoBuild's scheduler and work budget to use the selected interval.
+- Added batch processing so multiple eligible blueprints and frames advance during the same update.
+- Preserved urgent/non-urgent project priority after batch processing.
+- Kept the instant frame completion and unlimited per-update roof construction behavior.
+
+----------------------------------------
+
 v1.0.1
 
 - Added AutoBuild as a required dependency.
